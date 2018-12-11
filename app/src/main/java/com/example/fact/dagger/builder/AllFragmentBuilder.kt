@@ -1,7 +1,7 @@
 package com.example.fact.dagger.builder
 
-import com.example.fact.view.home.HomeActivity
-import com.example.fact.view.splash.SplashActivity
+import com.example.fact.view.home.fragment.HomeFragment
+import com.example.fact.view.home.fragment.InfoFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -11,10 +11,10 @@ import dagger.android.ContributesAndroidInjector
  * lalitkhandelwal99@gmail.com
  */
 @Module
-abstract class AllActivityBuilder {
+abstract class AllFragmentBuilder {
     @ContributesAndroidInjector(modules = [AllActivityModule::class])
-    internal abstract fun bindSplashActivity(): SplashActivity
+    internal abstract fun bindHomeFragment(): HomeFragment
 
     @ContributesAndroidInjector(modules = [AllActivityModule::class])
-    internal abstract fun bindHomeActivity(): HomeActivity
+    internal abstract fun bindInfoFragment(): InfoFragment
 }

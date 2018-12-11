@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Fact</string>
     <string name="tag_line_splash">Welcome to MVVM Sample</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_info">Info</string>
 </resources>
