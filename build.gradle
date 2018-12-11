@@ -49,7 +49,7 @@ ext {
     rxjava2AdapterVersion = '1.0.0'
     rxbindingVersion = '2.2.0'
 
-    dagger2Version = '2.17'
+    dagger2Version = '2.16'
 
     glideVersion = '4.8.0'
 }
