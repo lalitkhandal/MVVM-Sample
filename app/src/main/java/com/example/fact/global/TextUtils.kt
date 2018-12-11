@@ -7,6 +7,6 @@ object TextUtils {
      * @return boolean - Returns true if the string is valid.
      */
     fun isValidString(str: String?): Boolean {
-        return (!(str == null || !str.isNotEmpty() || str.trim() == ""))
+        return (str != null && str.isNotEmpty() && str.trim() != "")
     }
 }

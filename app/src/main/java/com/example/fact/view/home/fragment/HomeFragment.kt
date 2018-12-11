@@ -57,6 +57,9 @@ class HomeFragment : Fragment(), HomeNavigator {
         observeData()
     }
 
+    /**
+     * Get data from server if network available
+     */
     private fun getFactData() {
         isNetworkConnected {
             when {
@@ -71,6 +74,9 @@ class HomeFragment : Fragment(), HomeNavigator {
         }
     }
 
+    /**
+     * Subscribe observe so we detect data when any changes in live data
+     */
     private fun observeData() {
         homeViewModel?.factRowsListResponse?.observe(this, Observer<FactResponse> { it ->
             it?.let {

@@ -20,6 +20,9 @@ class SplashViewModel(appAPIs: AppAPIs, schedulerProvider: SchedulerProvider) :
         delayScreen()
     }
 
+    /**
+     * Delay splash screen for some time
+     */
     private fun delayScreen() {
         Single.fromCallable {}
             .subscribeOn(schedulerProvider.io())

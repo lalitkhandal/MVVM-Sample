@@ -8,20 +8,20 @@
     <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp"
-            android:layout_margin="5dp"
-            app:cardElevation="5dp"
-            app:strokeWidth="2dp"
+            app:cardCornerRadius="@dimen/size5"
+            android:layout_margin="@dimen/size5"
+            app:cardElevation="@dimen/size5"
+            app:strokeWidth="@dimen/stroke_width"
             app:strokeColor="@color/strokeColor">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="@dimen/margin10">
 
             <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="100dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:src="@drawable/place_holder"
                     android:scaleType="centerCrop"
@@ -41,7 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.title}"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="@dimen/margin10"
                         android:id="@+id/titleTextView"
                         tools:text="Title"/>
 
@@ -50,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.description}"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="@dimen/margin10"
                         android:id="@+id/descriptionTextView"
                         android:textColor="@android:color/darker_gray"
                         tools:text="Description"/>
@@ -61,9 +61,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     app:srcCompat="@drawable/ic_right_arrow"
-                    android:layout_marginStart="5dp"
-                    android:scaleType="centerCrop"
-            />
+                    android:layout_marginStart="@dimen/size5"
+                    android:scaleType="centerCrop"/>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

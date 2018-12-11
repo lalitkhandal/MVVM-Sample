@@ -11,5 +11,4 @@ class AdapterHomeViewModel(factRows: FactRows) {
     var title = ObservableField(factRows.title)
     var description = ObservableField(factRows.description)
     var imageUrl = ObservableField(factRows.imageHref)
-
 }

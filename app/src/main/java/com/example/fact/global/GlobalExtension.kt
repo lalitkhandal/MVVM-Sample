@@ -19,24 +19,22 @@ import com.google.android.material.snackbar.Snackbar
  */
 
 fun Fragment.isNetworkConnected(isConnected: (Boolean) -> Unit) {
-    @Suppress("DEPRECATION")
     val cm = activity?.getSystemService(Context.CONNECTIVITY_SERVICE)
     var activeNetwork: NetworkInfo? = null
     if (cm != null) {
         cm as ConnectivityManager
         activeNetwork = cm.activeNetworkInfo
     }
+    @Suppress("DEPRECATION")
     return isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting)
 }
 
 
 fun View?.showSnackBar(message: String?) {
-    try {
-        if (this != null && message != null) {
-            val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
-            snackbar.show()
+    this?.let {
+        message?.let {
+            val snackBar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
+            snackBar.show()
         }
-    } catch (e: Exception) {
-        e.printStackTrace()
     }
 }

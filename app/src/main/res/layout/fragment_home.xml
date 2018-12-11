@@ -13,8 +13,8 @@
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/row_home"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"/>
+                android:paddingStart="@dimen/size5"
+                android:paddingEnd="@dimen/size5"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

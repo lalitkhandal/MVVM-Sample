@@ -28,7 +28,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), A
     override val viewModel: SplashViewModel
         get() = splashViewModel
 
-    //Feild injection
+    //Field injection
     @Inject
     lateinit var splashViewModel: SplashViewModel
 

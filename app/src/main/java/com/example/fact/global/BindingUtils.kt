@@ -4,8 +4,8 @@ import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.fact.GlideApp
 
 /**
  * Created by Lalit Khandelwal on 11, December, 2018
@@ -13,13 +13,16 @@ import com.bumptech.glide.request.RequestOptions
  */
 object BindingUtils {
 
+    /**
+     *This method display image from server url
+     */
     @BindingAdapter("imageUrl", "placeHolder", "errorHolder")
     @JvmStatic
     fun loadImage(view: AppCompatImageView, url: String?, placeHolder: Drawable, errorHolder: Drawable) {
         if (TextUtils.isEmpty(url))
             view.setImageDrawable(placeHolder)
         else
-            Glide.with(view.context).load(url)
+            GlideApp.with(view.context).load(url)
                 .apply(RequestOptions().placeholder(placeHolder).error(errorHolder)).into(view)
     }
 }

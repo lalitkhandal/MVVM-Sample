@@ -16,6 +16,9 @@ class HomeAdapter : RecyclerView.Adapter<BaseViewHolder>() {
         return ItemViewHolder(binding)
     }
 
+    /**
+     * Add data in list and notify adapter
+     */
     fun addItems(factRowsList: List<FactRows>) {
         this.factRowsList = ArrayList()
         this.factRowsList.addAll(factRowsList)

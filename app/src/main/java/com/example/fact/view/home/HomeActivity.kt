@@ -22,6 +22,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     override val viewModel: HomeViewModel
         get() = homeViewModel
 
+    //Field injection
     @Inject
     lateinit var homeViewModel: HomeViewModel
     var binding: ActivityHomeBinding? = null
@@ -70,6 +71,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     }
 
 
+    /**
+     * Detect if toll bar hide when user click system back press
+     */
     override fun onBackPressed() {
         if (isCollapsed)
             binding?.appBarLayout?.setExpanded(true, true)
@@ -77,11 +81,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
             super.onBackPressed()
     }
 
+    /**
+     * Save title value
+     */
     override fun onSaveInstanceState(outState: Bundle?) {
         outState?.putString("title", "${binding?.toolBar?.title}")
         super.onSaveInstanceState(outState)
     }
 
+    /**
+     * Get title value and display
+     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState != null) {
