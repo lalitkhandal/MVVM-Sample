@@ -1,5 +1,6 @@
 package com.example.fact.dagger.builder
 
+import com.example.fact.dagger.module.AllActivityModule
 import com.example.fact.view.home.HomeActivity
 import com.example.fact.view.splash.SplashActivity
 import dagger.Module

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="com.example.fact.viewmodel.AdapterHomeViewModel"/>
+    </data>
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="5dp"
+            app:cardElevation="5dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/strokeColor">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@drawable/place_holder"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/factImageView"
+                    app:imageUrl="@{viewModel.imageUrl}"
+                    app:placeHolder="@{@drawable/place_holder}"
+                    app:errorHolder="@{@drawable/error_holder}"
+                    tools:ignore="ContentDescription"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/AppTheme.Title.Bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.title}"
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/titleTextView"
+                        tools:text="Title"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/AppTheme.Description.Regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.description}"
+                        android:layout_marginStart="10dp"
+                        android:id="@+id/descriptionTextView"
+                        android:textColor="@android:color/darker_gray"
+                        tools:text="Description"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    app:srcCompat="@drawable/ic_right_arrow"
+                    android:layout_marginStart="5dp"
+                    android:scaleType="centerCrop"
+            />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

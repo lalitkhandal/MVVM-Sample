@@ -18,6 +18,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), A
     override fun startActivity(activity: Class<*>) {
         val intent = Intent(this, activity)
         startActivity(intent)
+        finish()
     }
 
     override val bindingVariable: Int

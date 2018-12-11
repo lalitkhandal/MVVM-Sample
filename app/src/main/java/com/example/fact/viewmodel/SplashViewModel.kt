@@ -1,5 +1,6 @@
 package com.example.fact.viewmodel
 
+import com.example.fact.api.AppAPIs
 import com.example.fact.global.AppConstants
 import com.example.fact.global.rxjava.SchedulerProvider
 import com.example.fact.navigator.ActivityNavigator
@@ -13,7 +14,8 @@ import java.util.concurrent.TimeUnit
  * Created by Lalit Khandelwal on 11, December, 2018
  * lalitkhandelwal99@gmail.com
  */
-class SplashViewModel(schedulerProvider: SchedulerProvider) : BaseViewModel<ActivityNavigator>(schedulerProvider) {
+class SplashViewModel(appAPIs: AppAPIs, schedulerProvider: SchedulerProvider) :
+    BaseViewModel<ActivityNavigator>(appAPIs, schedulerProvider) {
     init {
         delayScreen()
     }

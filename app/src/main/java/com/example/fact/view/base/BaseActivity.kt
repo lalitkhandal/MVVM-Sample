@@ -5,7 +5,6 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.example.fact.global.NetworkUtils
 import dagger.android.AndroidInjection
 
 
@@ -38,9 +37,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
      * @return view model instance
      */
     abstract val viewModel: V
-
-    val isNetworkConnected: Boolean
-        get() = NetworkUtils.isNetworkConnected(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

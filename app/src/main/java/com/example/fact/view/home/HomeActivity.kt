@@ -5,9 +5,9 @@ import androidx.databinding.library.baseAdapters.BR
 import com.example.fact.R
 import com.example.fact.databinding.ActivityHomeBinding
 import com.example.fact.view.base.BaseActivity
+import com.example.fact.view.home.fragment.HomeFragment
 import com.example.fact.viewmodel.HomeViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_home.*
+import com.google.android.material.appbar.AppBarLayout
 import javax.inject.Inject
 
 /**
@@ -25,24 +25,67 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     @Inject
     lateinit var homeViewModel: HomeViewModel
     var binding: ActivityHomeBinding? = null
+    private var isCollapsed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = viewDataBinding
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        behaviourNavigation()
+        if (savedInstanceState == null)
+            displayFragment()
     }
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                binding?.viewFlipper?.displayedChild = 0
-                return@OnNavigationItemSelectedListener true
+    /**
+     * Display home fragment
+     */
+    private fun displayFragment() {
+        val manager = supportFragmentManager
+        val transaction = manager.beginTransaction()
+        val homeFragment = HomeFragment.newInstance()
+        homeFragment.homeViewModel = homeViewModel
+        transaction.replace(R.id.frameLayout, homeFragment)
+        transaction.commit()
+    }
+
+    /**
+     * Detect scroll behaviour when user scroll data
+     */
+    private fun behaviourNavigation() {
+        binding?.appBarLayout?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            isCollapsed = when {
+                Math.abs(verticalOffset) == binding?.appBarLayout?.totalScrollRange -> {
+                    // Collapsed
+                    true
+                }
+                verticalOffset == 0 -> {
+                    // Expanded
+                    false
+                }
+                else -> {
+                    false
+                    // Somewhere in between
+                }
             }
-            R.id.navigation_info -> {
-                binding?.viewFlipper?.displayedChild = 1
-                return@OnNavigationItemSelectedListener true
-            }
+        })
+    }
+
+
+    override fun onBackPressed() {
+        if (isCollapsed)
+            binding?.appBarLayout?.setExpanded(true, true)
+        else
+            super.onBackPressed()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString("title", "${binding?.toolBar?.title}")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState != null) {
+            binding?.toolBar?.title = savedInstanceState.getString("title")
         }
-        false
     }
 }

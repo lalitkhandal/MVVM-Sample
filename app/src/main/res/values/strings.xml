@@ -4,4 +4,6 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_info">Info</string>
+    <string name="noInternet">Please check your internet connection.</string>
+    <string name="requestFailed">Request failed, Please try again.</string>
 </resources>

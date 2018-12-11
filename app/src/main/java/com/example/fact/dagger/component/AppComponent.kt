@@ -3,7 +3,6 @@ package com.example.fact.dagger.component
 import android.app.Application
 import com.example.fact.FactApplication
 import com.example.fact.dagger.builder.AllActivityBuilder
-import com.example.fact.dagger.builder.AllFragmentBuilder
 import com.example.fact.dagger.module.AppModule
 import com.example.fact.dagger.module.RetrofitModule
 import dagger.BindsInstance
@@ -17,7 +16,7 @@ import javax.inject.Singleton
  * lalitkhandelwal99@gmail.com
  */
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, AppModule::class, RetrofitModule::class, AllActivityBuilder::class, AllFragmentBuilder::class])
+@Component(modules = [AndroidInjectionModule::class, AppModule::class, RetrofitModule::class, AllActivityBuilder::class])
 interface AppComponent {
 
     fun inject(mApplication: FactApplication)
