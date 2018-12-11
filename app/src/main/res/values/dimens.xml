@@ -1,0 +1,16 @@
+<resources>
+
+    <dimen name="font14">14sp</dimen>
+    <dimen name="font15">15sp</dimen>
+    <dimen name="font16">16sp</dimen>
+    <dimen name="font17">17sp</dimen>
+    <dimen name="font18">18sp</dimen>
+    <dimen name="font19">19sp</dimen>
+    <dimen name="font20">20sp</dimen>
+    <dimen name="font21">21sp</dimen>
+    <dimen name="font22">22sp</dimen>
+    <dimen name="font24">24sp</dimen>
+    <dimen name="font26">26sp</dimen>
+    <dimen name="font28">28sp</dimen>
+    <dimen name="font30">30sp</dimen>
+</resources>
