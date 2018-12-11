@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Fact</string>
+    <string name="tag_line_splash">Welcome to Fact</string>
+    <string name="title_activity_home">Home</string>
+    <string name="noInternet">Please check your internet connection.</string>
+    <string name="requestFailed">Request failed, Please try again.</string>
 </resources>
