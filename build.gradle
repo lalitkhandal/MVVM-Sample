@@ -30,8 +30,10 @@ task clean(type: Delete) {
 ext {
     // Test dependencies
     junitVersion = '4.12'
+    testCoreVersion = '1.0.0'
     testRunnerVersion = '1.1.0'
     testRuleVersion = '1.1.0'
+    testJunitVersion = '1.0.0'
     espressoVersion = '3.1.0'
 
     // App dependencies

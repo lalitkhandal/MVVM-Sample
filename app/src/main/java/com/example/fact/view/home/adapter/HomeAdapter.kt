@@ -40,6 +40,9 @@ class HomeAdapter : RecyclerView.Adapter<BaseViewHolder>() {
             adapterHomeViewModel = AdapterHomeViewModel(factRowsList[position])
             rowBinding.viewModel = adapterHomeViewModel
             rowBinding.executePendingBindings()
+            rowBinding.root.setOnClickListener {
+
+            }
         }
     }
 }
