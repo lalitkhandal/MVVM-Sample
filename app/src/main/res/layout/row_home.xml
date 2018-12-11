@@ -14,7 +14,7 @@
             app:strokeWidth="@dimen/stroke_width"
             app:strokeColor="@color/strokeColor">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin10">
@@ -29,19 +29,23 @@
                     app:imageUrl="@{viewModel.imageUrl}"
                     app:placeHolder="@{@drawable/place_holder}"
                     app:errorHolder="@{@drawable/error_holder}"
-                    tools:ignore="ContentDescription"/>
+                    tools:ignore="ContentDescription"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/size5"
+                    app:layout_constraintStart_toEndOf="@+id/factImageView"
+                    android:layout_marginStart="@dimen/margin10"
+                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView">
                 <androidx.appcompat.widget.AppCompatTextView
                         style="@style/AppTheme.Title.Bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.title}"
-                        android:layout_marginStart="@dimen/margin10"
                         android:id="@+id/titleTextView"
                         tools:text="Title"/>
 
@@ -50,7 +54,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.description}"
-                        android:layout_marginStart="@dimen/margin10"
                         android:id="@+id/descriptionTextView"
                         android:textColor="@android:color/darker_gray"
                         tools:text="Description"/>
@@ -61,9 +64,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     app:srcCompat="@drawable/ic_right_arrow"
-                    android:layout_marginStart="@dimen/size5"
-                    android:scaleType="centerCrop"/>
-        </LinearLayout>
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/appCompatImageView"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>
