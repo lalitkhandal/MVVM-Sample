@@ -30,6 +30,9 @@ fun Fragment.isNetworkConnected(isConnected: (Boolean) -> Unit) {
 }
 
 
+/**
+ * Show message using SnackBar
+ */
 fun View?.showSnackBar(message: String?) {
     this?.let {
         message?.let {
@@ -37,4 +40,11 @@ fun View?.showSnackBar(message: String?) {
             snackBar.show()
         }
     }
+}
+
+/**
+ * @return  Returns true if the charSequence is not empty and also null.
+ */
+fun CharSequence?.isNotEmptyAndNull(): Boolean {
+    return this != null && this.isNotEmpty() && this.trim() != ""
 }
