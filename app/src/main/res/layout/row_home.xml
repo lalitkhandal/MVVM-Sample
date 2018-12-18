@@ -32,32 +32,31 @@
                     tools:ignore="ContentDescription"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-            <LinearLayout
+            <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/AppTheme.Title.Bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="@dimen/size5"
-                    app:layout_constraintStart_toEndOf="@+id/factImageView"
+                    android:text="@{viewModel.title}"
+                    android:id="@+id/titleTextView"
                     android:layout_marginStart="@dimen/margin10"
-                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView">
-                <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/AppTheme.Title.Bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.title}"
-                        android:id="@+id/titleTextView"
-                        tools:text="Title"/>
+                    android:layout_marginEnd="@dimen/margin10"
+                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                    app:layout_constraintStart_toEndOf="@+id/factImageView"
+                    tools:text="Title"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/AppTheme.Description.Regular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.description}"
-                        android:id="@+id/descriptionTextView"
-                        android:textColor="@android:color/darker_gray"
-                        tools:text="Description"/>
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/AppTheme.Description.Regular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.description}"
+                    android:id="@+id/descriptionTextView"
+                    android:layout_marginStart="@dimen/margin10"
+                    android:layout_marginEnd="@dimen/margin10"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                    app:layout_constraintStart_toEndOf="@+id/factImageView"
+                    tools:text="Description"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
