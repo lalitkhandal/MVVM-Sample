@@ -27,10 +27,11 @@ class HomeViewModel(appAPIs: AppAPIs, schedulerProvider: SchedulerProvider) :
     /**
      * Get fact data from server
      */
-    fun getFactData() {
+    fun getFactData(error: Boolean) {
         navigator?.onRefresh(true)
+        val observable = if (error) appAPIs.getFactErrorData() else appAPIs.getFactData()
         compositeDisposable.add(
-            appAPIs.getFactData()
+            observable
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe({ response ->

@@ -14,4 +14,8 @@ interface AppAPIs {
     @Headers("Content-Type: application/json")
     @GET("s/2iodh4vg0eortkl/facts.json")
     fun getFactData(): Observable<FactResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("s/2iodh4vg0eortkl")
+    fun getFactErrorData(): Observable<FactResponse>
 }

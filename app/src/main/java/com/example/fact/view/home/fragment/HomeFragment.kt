@@ -35,6 +35,7 @@ class HomeFragment : Fragment(), HomeNavigator {
     private var homeAdapter: HomeAdapter? = null
     private var binding: FragmentHomeBinding? = null
     var homeViewModel: HomeViewModel? = null
+    private var isError = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,10 @@ class HomeFragment : Fragment(), HomeNavigator {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            isError = it.getBoolean("isError")
+        }
+
         homeActivity = activity as HomeActivity
         homeViewModel?.navigator = this
         homeAdapter = HomeAdapter()
@@ -67,7 +72,8 @@ class HomeFragment : Fragment(), HomeNavigator {
         isNetworkConnected {
             when {
                 it -> {
-                    homeViewModel?.getFactData()
+
+                    homeViewModel?.getFactData(isError)
                 }
                 else -> {
                     onRefresh(false)

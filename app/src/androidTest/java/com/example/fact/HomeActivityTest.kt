@@ -1,5 +1,6 @@
 package com.example.fact
 
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -35,7 +36,6 @@ class HomeActivityTest {
     @Throws(Exception::class)
     fun setUp() {
         recyclerViewMatcher = RecyclerViewMatcher(R.id.factRecyclerView)
-        homeActivity.launchActivity(null)
     }
 
     @After
@@ -48,6 +48,7 @@ class HomeActivityTest {
     * */
     @Test
     fun assertScreenStateSuccess() {
+        homeActivity.launchActivity(null)
         homeActivity.activity.isNetworkConnected {
             when {
                 it -> {
@@ -91,6 +92,8 @@ class HomeActivityTest {
     */
     @Test
     fun assertScreenStateFailure() {
+        homeActivity.launchActivity(Intent().putExtra("isError", true))
+        Thread.sleep(2000)
         //UI test
         onView(withId(R.id.toolBar)).check(matches(isDisplayed()))
 
@@ -98,31 +101,10 @@ class HomeActivityTest {
 
         assertThat(getRecyclerViewCount(), `is`(0))
 
-        //Unit test
-        triggerOnUnknownError()
-        assert(homeActivity.activity.onUnknownError)
-        triggerOnUnknownErrorCode()
-        assert(homeActivity.activity.onUnknownErrorCode)
-        triggerOnNetworkError()
-        assert(homeActivity.activity.onNetworkError)
-        triggerOnTimeout()
-        assert(homeActivity.activity.onTimeout)
-    }
-
-    private fun triggerOnUnknownError() {
-        homeActivity.activity.homeFragment.onUnknownError("")
-    }
-
-    private fun triggerOnNetworkError() {
-        homeActivity.activity.homeFragment.onUnknownError("")
-    }
-
-    private fun triggerOnUnknownErrorCode() {
-        homeActivity.activity.homeFragment.onUnknownError("")
-    }
-
-    private fun triggerOnTimeout() {
-        homeActivity.activity.homeFragment.onUnknownError("")
+        assert(
+            homeActivity.activity.onUnknownError or homeActivity.activity.onUnknownErrorCode
+                    or homeActivity.activity.onNetworkError or homeActivity.activity.onTimeout
+        )
     }
 
     private fun withRecyclerView(recyclerViewId: Int): RecyclerViewMatcher {

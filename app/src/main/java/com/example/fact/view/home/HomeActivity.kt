@@ -31,7 +31,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     var onUnknownError = false
     var onNetworkError = false
     var onUnknownErrorCode = false
-    val homeFragment = HomeFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     private fun displayFragment() {
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
+        val homeFragment = HomeFragment.newInstance()
         homeFragment.homeViewModel = homeViewModel
+        intent?.let {
+            val bundle = Bundle()
+            bundle.putBoolean("isError", intent.getBooleanExtra("isError", false))
+            homeFragment.arguments = bundle
+        }
         transaction.replace(R.id.frameLayout, homeFragment)
         transaction.commit()
     }
