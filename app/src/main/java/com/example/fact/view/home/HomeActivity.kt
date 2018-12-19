@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.databinding.library.baseAdapters.BR
 import com.example.fact.R
 import com.example.fact.databinding.ActivityHomeBinding
-import com.example.fact.global.espresso.DataLoadIdlingResource
 import com.example.fact.view.base.BaseActivity
 import com.example.fact.view.home.fragment.HomeFragment
 import com.example.fact.viewmodel.HomeViewModel
@@ -16,8 +15,6 @@ import javax.inject.Inject
  * lalitkhandelwal99@gmail.com
  */
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
-    val idlingResource: DataLoadIdlingResource
-        get() = DataLoadIdlingResource()
     override val bindingVariable: Int
         get() = BR.viewModel
     override val layoutId: Int
@@ -30,6 +27,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     lateinit var homeViewModel: HomeViewModel
     private var binding: ActivityHomeBinding? = null
     private var isCollapsed = false
+    var onTimeout = false
+    var onUnknownError = false
+    var onNetworkError = false
+    var onUnknownErrorCode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +48,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         val transaction = manager.beginTransaction()
         val homeFragment = HomeFragment.newInstance()
         homeFragment.homeViewModel = homeViewModel
+        intent?.let {
+            val bundle = Bundle()
+            bundle.putBoolean("isError", intent.getBooleanExtra("isError", false))
+            homeFragment.arguments = bundle
+        }
         transaction.replace(R.id.frameLayout, homeFragment)
         transaction.commit()
     }

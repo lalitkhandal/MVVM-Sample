@@ -35,6 +35,7 @@ ext {
     testRuleVersion = '1.1.0'
     testJunitVersion = '1.0.0'
     espressoVersion = '3.1.0'
+    idlingResourceVersion = '3.1.1'
 
     // App dependencies
     appCompactVersion = '1.0.2'

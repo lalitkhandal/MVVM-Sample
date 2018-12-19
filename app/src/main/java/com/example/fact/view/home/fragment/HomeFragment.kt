@@ -31,10 +31,11 @@ class HomeFragment : Fragment(), HomeNavigator {
         }
     }
 
-    var homeActivity: HomeActivity? = null
+    private var homeActivity: HomeActivity? = null
     private var homeAdapter: HomeAdapter? = null
     private var binding: FragmentHomeBinding? = null
     var homeViewModel: HomeViewModel? = null
+    private var isError = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,10 @@ class HomeFragment : Fragment(), HomeNavigator {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            isError = it.getBoolean("isError")
+        }
+
         homeActivity = activity as HomeActivity
         homeViewModel?.navigator = this
         homeAdapter = HomeAdapter()
@@ -67,7 +72,8 @@ class HomeFragment : Fragment(), HomeNavigator {
         isNetworkConnected {
             when {
                 it -> {
-                    homeViewModel?.getFactData()
+
+                    homeViewModel?.getFactData(isError)
                 }
                 else -> {
                     onRefresh(false)
@@ -84,33 +90,31 @@ class HomeFragment : Fragment(), HomeNavigator {
         homeViewModel?.factRowsListResponse?.observe(this, Observer<FactResponse> { it ->
             it?.let {
                 homeAdapter?.addItems(homeViewModel!!.checkData(it.rows))
-                homeActivity?.idlingResource?.setIdleState(true)
             }
         })
     }
 
     override fun onRefresh(isRefresh: Boolean) {
         binding?.factSwipeRefreshLayout?.isRefreshing = isRefresh
-        homeActivity?.idlingResource?.setIdleState(false)
     }
 
     override fun onUnknownErrorCode(statusCode: Int, errorMessage: String) {
         binding?.factRecyclerView.showSnackBar(errorMessage)
-        homeActivity?.idlingResource?.setIdleState(true)
+        homeActivity?.onUnknownErrorCode = true
     }
 
     override fun onUnknownError(errorMessage: String) {
         binding?.factRecyclerView.showSnackBar(errorMessage)
-        homeActivity?.idlingResource?.setIdleState(true)
+        homeActivity?.onUnknownError = true
     }
 
     override fun onTimeout() {
         binding?.factRecyclerView.showSnackBar(activity?.getString(R.string.requestFailed))
-        homeActivity?.idlingResource?.setIdleState(true)
+        homeActivity?.onTimeout = true
     }
 
     override fun onNetworkError() {
         binding?.factRecyclerView.showSnackBar(activity?.getString(R.string.noInternet))
-        homeActivity?.idlingResource?.setIdleState(true)
+        homeActivity?.onNetworkError = true
     }
 }

@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.fact.api.AppAPIs
 import com.example.fact.api.error.GetRetroFitError
-import com.example.fact.global.TextUtils
+import com.example.fact.global.isNotEmptyAndNull
 import com.example.fact.global.rxjava.SchedulerProvider
 import com.example.fact.model.FactResponse
 import com.example.fact.model.FactRows
@@ -27,10 +27,11 @@ class HomeViewModel(appAPIs: AppAPIs, schedulerProvider: SchedulerProvider) :
     /**
      * Get fact data from server
      */
-    fun getFactData() {
+    fun getFactData(error: Boolean) {
         navigator?.onRefresh(true)
+        val observable = if (error) appAPIs.getFactErrorData() else appAPIs.getFactData()
         compositeDisposable.add(
-            appAPIs.getFactData()
+            observable
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .subscribe({ response ->
@@ -52,9 +53,9 @@ class HomeViewModel(appAPIs: AppAPIs, schedulerProvider: SchedulerProvider) :
         if (!factRowsList.isNullOrEmpty()) {
             for (i in 0 until factRowsList.size) {
                 val row = factRowsList[i]
-                if (TextUtils.isValidString(row.title) ||
-                    TextUtils.isValidString(row.description) ||
-                    TextUtils.isValidString(row.imageHref)
+                if (row.title.isNotEmptyAndNull() ||
+                    row.description.isNotEmptyAndNull() ||
+                    row.imageHref.isNotEmptyAndNull()
                 ) list.add(row)
             }
         }

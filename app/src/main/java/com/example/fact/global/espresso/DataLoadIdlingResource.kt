@@ -32,15 +32,6 @@ class DataLoadIdlingResource : IdlingResource {
      */
     fun setIdleState(isIdleNow: Boolean) {
         println("IS IDLE NOW: $isIdleNow")
-        if (isIdleNow) {
-            try {
-                Thread.sleep(1000)
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-
-        }
-        println("IS IDLE NOW: $isIdleNow")
         mIsIdleNow.set(isIdleNow)
         if (isIdleNow && mCallback != null) {
             mCallback!!.onTransitionToIdle()
