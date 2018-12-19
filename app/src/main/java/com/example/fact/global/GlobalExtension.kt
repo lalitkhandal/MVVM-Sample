@@ -1,5 +1,6 @@
 package com.example.fact.global
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -20,6 +21,18 @@ import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.isNetworkConnected(isConnected: (Boolean) -> Unit) {
     val cm = activity?.getSystemService(Context.CONNECTIVITY_SERVICE)
+    var activeNetwork: NetworkInfo? = null
+    if (cm != null) {
+        cm as ConnectivityManager
+        activeNetwork = cm.activeNetworkInfo
+    }
+    @Suppress("DEPRECATION")
+    return isConnected(activeNetwork != null && activeNetwork.isConnectedOrConnecting)
+}
+
+
+fun Activity?.isNetworkConnected(isConnected: (Boolean) -> Unit) {
+    val cm = this?.getSystemService(Context.CONNECTIVITY_SERVICE)
     var activeNetwork: NetworkInfo? = null
     if (cm != null) {
         cm as ConnectivityManager

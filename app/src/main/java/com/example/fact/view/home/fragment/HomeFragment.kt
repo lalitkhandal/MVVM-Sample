@@ -13,6 +13,7 @@ import com.example.fact.global.isNetworkConnected
 import com.example.fact.global.showSnackBar
 import com.example.fact.model.FactResponse
 import com.example.fact.navigator.HomeNavigator
+import com.example.fact.view.home.HomeActivity
 import com.example.fact.view.home.adapter.HomeAdapter
 import com.example.fact.viewmodel.HomeViewModel
 
@@ -30,6 +31,7 @@ class HomeFragment : Fragment(), HomeNavigator {
         }
     }
 
+    private var homeActivity: HomeActivity? = null
     private var homeAdapter: HomeAdapter? = null
     private var binding: FragmentHomeBinding? = null
     var homeViewModel: HomeViewModel? = null
@@ -46,6 +48,7 @@ class HomeFragment : Fragment(), HomeNavigator {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeActivity = activity as HomeActivity
         homeViewModel?.navigator = this
         homeAdapter = HomeAdapter()
         binding?.factRecyclerView?.adapter = homeAdapter
@@ -91,17 +94,21 @@ class HomeFragment : Fragment(), HomeNavigator {
 
     override fun onUnknownErrorCode(statusCode: Int, errorMessage: String) {
         binding?.factRecyclerView.showSnackBar(errorMessage)
+        homeActivity?.onUnknownErrorCode = true
     }
 
     override fun onUnknownError(errorMessage: String) {
         binding?.factRecyclerView.showSnackBar(errorMessage)
+        homeActivity?.onUnknownError = true
     }
 
     override fun onTimeout() {
         binding?.factRecyclerView.showSnackBar(activity?.getString(R.string.requestFailed))
+        homeActivity?.onTimeout = true
     }
 
     override fun onNetworkError() {
         binding?.factRecyclerView.showSnackBar(activity?.getString(R.string.noInternet))
+        homeActivity?.onNetworkError = true
     }
 }
