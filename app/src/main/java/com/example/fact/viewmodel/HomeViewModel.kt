@@ -10,6 +10,7 @@ import com.example.fact.model.FactResponse
 import com.example.fact.model.FactRows
 import com.example.fact.navigator.HomeNavigator
 import com.example.fact.view.base.BaseViewModel
+import io.reactivex.disposables.Disposable
 
 /**
  * Created by Lalit Khandelwal on 11, December, 2018
@@ -27,22 +28,30 @@ class HomeViewModel(appAPIs: AppAPIs, schedulerProvider: SchedulerProvider) :
     /**
      * Get fact data from server
      */
-    fun getFactData(error: Boolean) {
+    private var disposable: Disposable? = null
+
+    fun getFactData() {
         navigator?.onRefresh(true)
-        val observable = if (error) appAPIs.getFactErrorData() else appAPIs.getFactData()
-        compositeDisposable.add(
-            observable
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .subscribe({ response ->
-                    navigator?.onRefresh(false)
-                    factRowsListResponse?.value = response
-                    title.set(response.title)
-                }, { throwable ->
-                    navigator?.onRefresh(false)
-                    GetRetroFitError(navigator, throwable)
-                })
-        )
+        disposable = appAPIs.getFactData()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .subscribe({ response ->
+                navigator?.onRefresh(false)
+                factRowsListResponse?.value = response
+                title.set(response.title)
+            }, { throwable ->
+                navigator?.onRefresh(false)
+                GetRetroFitError(navigator, throwable)
+            }, {
+
+            })
+        compositeDisposable.add(disposable!!)
+    }
+
+    fun cancelRequest() {
+        disposable?.dispose()
+        navigator?.onRefresh(false)
+        navigator?.onTimeout()
     }
 
     /**
