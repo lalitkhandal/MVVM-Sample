@@ -60,9 +60,12 @@ class HomeFragment : Fragment(), HomeNavigator {
         binding?.factSwipeRefreshLayout?.setOnRefreshListener {
             getFactData()
         }
+
+        observeData()
         if (homeViewModel?.factRowsListResponse?.value == null)
             getFactData()
-        observeData()
+        if (isError)
+            homeViewModel?.cancelRequest()
     }
 
     /**
@@ -72,8 +75,7 @@ class HomeFragment : Fragment(), HomeNavigator {
         isNetworkConnected {
             when {
                 it -> {
-
-                    homeViewModel?.getFactData(isError)
+                    homeViewModel?.getFactData()
                 }
                 else -> {
                     onRefresh(false)
