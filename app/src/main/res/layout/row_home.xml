@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.example.fact.viewmodel.AdapterHomeViewModel"/>
+        <variable name="viewModel" type="com.fact.viewmodel.AdapterHomeViewModel"/>
     </data>
     <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

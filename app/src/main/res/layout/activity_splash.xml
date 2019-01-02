@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".view.splash.SplashActivity">
+        tools:context="com.fact.view.splash.SplashActivity">
 
     <data>
-        <variable name="viewModel" type="com.example.fact.viewmodel.SplashViewModel"/>
+        <variable name="viewModel" type="com.fact.viewmodel.SplashViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
