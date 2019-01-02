@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".view.home.HomeActivity">
+        tools:context="com.fact.view.home.HomeActivity">
 
     <data>
-        <variable name="viewModel" type="com.example.fact.viewmodel.HomeViewModel"/>
+        <variable name="viewModel" type="com.fact.viewmodel.HomeViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
