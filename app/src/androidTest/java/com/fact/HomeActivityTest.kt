@@ -7,7 +7,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.fact.global.isNetworkConnected
 import com.fact.view.home.HomeActivity
 import org.hamcrest.Matchers.`is`
 import org.junit.After
@@ -49,41 +48,33 @@ class HomeActivityTest {
     @Test
     fun assertScreenStateSuccess() {
         homeActivity.launchActivity(null)
-        homeActivity.activity.isNetworkConnected {
-            when {
-                it -> {
-                    /**
-                     * Assuming that 5 sec will be enough for network response
-                     * Ideally IdlingResource should have been used instead of Thread.sleep(),
-                     * but somehow it wasn't working and due to restricted time frame, it has been used.
-                     *
-                     */
-                    Thread.sleep(5000)
 
-                    onView(withId(R.id.toolBar)).check(matches(isDisplayed()))
+        /**
+         * Assuming that 5 sec will be enough for network response
+         * Ideally IdlingResource should have been used instead of Thread.sleep(),
+         * but somehow it wasn't working and due to restricted time frame, it has been used.
+         *
+         */
+        Thread.sleep(5000)
 
-                    onView(
-                        withRecyclerView(R.id.factRecyclerView)
-                            .atPositionOnView(0, R.id.titleTextView)
-                    )
-                        .check(matches(withText("Beavers")))
+        onView(withId(R.id.toolBar)).check(matches(isDisplayed()))
 
-                    onView(
-                        withRecyclerView(R.id.factRecyclerView)
-                            .atPositionOnView(0, R.id.factImageView)
-                    ).check(matches(isDisplayed()))
+        onView(
+            withRecyclerView(R.id.factRecyclerView)
+                .atPositionOnView(0, R.id.titleTextView)
+        )
+            .check(matches(withText("Beavers")))
 
-                    onView(
-                        withRecyclerView(R.id.factRecyclerView)
-                            .atPositionOnView(0, R.id.descriptionTextView)
-                    )
-                        .check(matches(isDisplayed()))
-                }
-                else -> {
-                    assert(homeActivity.activity.onNetworkError)
-                }
-            }
-        }
+        onView(
+            withRecyclerView(R.id.factRecyclerView)
+                .atPositionOnView(0, R.id.factImageView)
+        ).check(matches(isDisplayed()))
+
+        onView(
+            withRecyclerView(R.id.factRecyclerView)
+                .atPositionOnView(0, R.id.descriptionTextView)
+        )
+            .check(matches(isDisplayed()))
     }
 
     /*
